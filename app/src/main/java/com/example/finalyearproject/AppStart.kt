@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.finalyearproject.ui.navigation.navGraph
-import com.example.finalyearproject.ui.screen.UserAccountViewModel
+import com.example.finalyearproject.ui.screen.viewModel.UserAccountViewModel
 
 @Composable
 fun appStart(

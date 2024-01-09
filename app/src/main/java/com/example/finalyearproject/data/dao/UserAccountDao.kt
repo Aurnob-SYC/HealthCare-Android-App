@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.Flow
 interface UserAccountDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun insert(userAccount: UserAccount)
+    fun insert(userAccount: UserAccount)
 
     @Delete
-     fun delete(userAccount: UserAccount)
+    fun delete(userAccount: UserAccount)
 
     @Query("SELECT * FROM UserAccount WHERE email = :email AND password = :password")
     fun authenticate(email: String, password: String): Flow<UserAccount>
