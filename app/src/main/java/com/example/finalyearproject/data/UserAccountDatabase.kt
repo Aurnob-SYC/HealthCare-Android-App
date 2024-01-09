@@ -9,21 +9,6 @@ import com.example.finalyearproject.data.entity.UserAccount
 abstract class UserAccountDatabase: RoomDatabase() {
     abstract val userAccountDao: UserAccountDao
 
-    /* companion object {
-         @Volatile
-         private var INSTANCE: UserAccountDatabase? = null
 
-         fun getInstance(context: Context): UserAccountDatabase {
-             synchronized(this) {
-                 return INSTANCE ?: Room.databaseBuilder(
-                     context.applicationContext,
-                     UserAccountDatabase::class.java,
-                     "healthCareApp_db"
-                 ).build().also {
-                     INSTANCE = it
-                 }
-             }
-         }
-     }*/
 
 }
