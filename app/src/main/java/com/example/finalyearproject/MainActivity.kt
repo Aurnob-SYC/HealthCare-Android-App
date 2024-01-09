@@ -7,18 +7,22 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.finalyearproject.data.UserAccountDatabase
 import com.example.finalyearproject.ui.screen.viewModel.OthersViewModel
 import com.example.finalyearproject.ui.screen.viewModel.UserAccountViewModel
 import com.example.finalyearproject.ui.theme.FinalYearProjectTheme
 
 class MainActivity : ComponentActivity() {
+
+
     private val db by lazy {
         Room.databaseBuilder(
             applicationContext,
             UserAccountDatabase::class.java,
             "contacts.db"
-        ).build()
+        )  .build()
     }
     private val viewModel by viewModels<UserAccountViewModel>(
         factoryProducer = {
