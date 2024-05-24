@@ -9,12 +9,13 @@ import com.example.finalyearproject.ui.screen.viewModel.UserAccountViewModel
 import com.example.finalyearproject.ui.screen.homeScreen
 import com.example.finalyearproject.ui.screen.logInScreen
 import com.example.finalyearproject.ui.screen.signUpScreen
+import healthArticleScreen
 
 
 @Composable
 fun navGraph(
     navController: NavHostController,
-    viewModel: UserAccountViewModel,
+    userAccountViewModel: UserAccountViewModel,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -24,15 +25,19 @@ fun navGraph(
     ) {
 
         composable(route = "LogIn") {
-            logInScreen(navController = navController, viewModel = viewModel)
+            logInScreen(navController = navController, viewModel = userAccountViewModel)
         }
 
         composable(route = "SignUp") {
-            signUpScreen(navController = navController, viewModel = viewModel)
+            signUpScreen(navController = navController, viewModel = userAccountViewModel)
         }
         
         composable(route = "Home") {
-            homeScreen(navController = navController, viewModel = viewModel)
+            homeScreen(navController = navController, viewModel = userAccountViewModel)
+        }
+
+        composable(route = "HealthArticle") {
+            healthArticleScreen(navController = navController, viewModel = userAccountViewModel)
         }
     }
 }

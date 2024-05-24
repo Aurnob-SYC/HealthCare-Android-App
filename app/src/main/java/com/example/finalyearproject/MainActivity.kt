@@ -10,9 +10,11 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.finalyearproject.data.UserAccountDatabase
+import com.example.finalyearproject.data.entity.HealthArticles
 import com.example.finalyearproject.ui.screen.viewModel.OthersViewModel
 import com.example.finalyearproject.ui.screen.viewModel.UserAccountViewModel
 import com.example.finalyearproject.ui.theme.FinalYearProjectTheme
+
 
 class MainActivity : ComponentActivity() {
 
@@ -46,6 +48,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FinalYearProjectTheme {
+
+                /*val articles = listOf(
+                    HealthArticles(name = "Article 1", imageURL = "url_1"),
+                    HealthArticles(name = "Article 2", imageURL = "url_2"),
+                    // Add more articles as needed
+                )
+                viewModel.saveHealthArticles(articles)*/
 
                 //viewModel.deleteAll()
                 appStart(viewModel = viewModel)

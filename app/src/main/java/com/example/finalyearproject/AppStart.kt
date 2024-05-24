@@ -11,5 +11,5 @@ fun appStart(
     navController: NavHostController = rememberNavController(),
     viewModel: UserAccountViewModel
 ) {
-    navGraph(navController = navController, viewModel = viewModel)
+    navGraph(navController = navController, userAccountViewModel = viewModel)
 }

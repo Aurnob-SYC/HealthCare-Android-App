@@ -1,5 +1,6 @@
 package com.example.finalyearproject.ui.screen
 
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,9 +33,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.finalyearproject.data.dao.UserAccountDao
+import com.example.finalyearproject.data.entity.HealthArticles
+import com.example.finalyearproject.data.entity.UserAccount
 import com.example.finalyearproject.ui.screen.viewModel.UserAccountViewModel
+import com.example.finalyearproject.ui.theme.FinalYearProjectTheme
+import kotlinx.coroutines.flow.Flow
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -190,7 +200,9 @@ fun homeScreen(
                         .padding(10.dp)
                 ) {
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                                  navController.navigate("HealthArticle")
+                        },
                         modifier = Modifier.fillMaxSize()
                     ) {
                         Column(
@@ -278,14 +290,40 @@ fun homeScreen(
 
 
 
-
 /*
 @Preview
 @Composable
 fun previewHomeScreen() {
     FinalYearProjectTheme {
-        homeScreen(navController = rememberNavController())
+        val userAccountViewModel = UserAccountViewModel(MockUserAccountDao());
+        homeScreen(navController = rememberNavController(), viewModel = userAccountViewModel);
     }
 }
 
+class MockUserAccountDao : UserAccountDao {
+    override fun insert(userAccount: UserAccount) {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(userAccount: UserAccount) {
+        TODO("Not yet implemented")
+    }
+
+    override fun authenticate(email: String, password: String): Flow<UserAccount> {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteAll() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAllHealthArticles(): Flow<List<HealthArticles>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun insertAllHealthArticles(healthArticles: List<HealthArticles>) {
+        TODO("Not yet implemented")
+    }
+
+}
 */

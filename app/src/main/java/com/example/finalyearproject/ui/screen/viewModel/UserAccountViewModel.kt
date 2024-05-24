@@ -3,12 +3,14 @@ package com.example.finalyearproject.ui.screen.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalyearproject.data.dao.UserAccountDao
+import com.example.finalyearproject.data.entity.HealthArticles
 import com.example.finalyearproject.data.entity.UserAccount
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 
 class UserAccountViewModel (val userAccountDao: UserAccountDao): ViewModel() {
@@ -50,6 +52,29 @@ class UserAccountViewModel (val userAccountDao: UserAccountDao): ViewModel() {
     fun updateCurrentUser(email: String?) {
         _currentUser.value = email
     }
+
+
+    // OTHERS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    //HEALTH ARTICLES
+    private val _healthArticlesList = MutableStateFlow<List<HealthArticles>>(emptyList())
+    val healthArticlesList: StateFlow<List<HealthArticles>> = _healthArticlesList.asStateFlow()
+    fun getHealthArticles() {
+        viewModelScope.launch(Dispatchers.IO) {
+            /*val temp = userAccountDao.getAllHealthArticles()
+            _healthArticlesList.value = temp*/
+            userAccountDao.getAllHealthArticles().collect { articles ->
+                _healthArticlesList.value = articles
+            }
+        }
+    }
+    fun saveHealthArticles(healthArticles: List<HealthArticles>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            userAccountDao.insertAllHealthArticles(healthArticles)
+        }
+    }
+
+    //
 
 }
 

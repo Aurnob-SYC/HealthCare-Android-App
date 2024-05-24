@@ -8,3 +8,4 @@ data class HealthArticles(
     val name: String = "",
     val imageURL: String = ""
 )
+

@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.finalyearproject.data.entity.HealthArticles
 import com.example.finalyearproject.data.entity.UserAccount
 import kotlinx.coroutines.flow.Flow
 
@@ -22,5 +23,17 @@ interface UserAccountDao {
 
     @Query("DELETE FROM UserAccount")
     fun deleteAll()
+
+
+
+    //OTHERS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // HEALTH ARTICLES
+    @Query("SELECT * FROM HEALTHARTICLES")
+    fun getAllHealthArticles(): Flow<List<HealthArticles>>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAllHealthArticles(healthArticles: List<HealthArticles>)
+
+    //
 
 }
