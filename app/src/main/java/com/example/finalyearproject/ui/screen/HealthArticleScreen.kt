@@ -44,7 +44,7 @@ fun healthArticleScreen(
     modifier: Modifier = Modifier
 
     ) {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+    /*val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val healthArticles by viewModel.healthArticlesList.collectAsState()
     val healthArticlesArray = healthArticles.toTypedArray()
     Scaffold(
@@ -77,7 +77,7 @@ fun healthArticleScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { *//* do something *//* }) {
                         Icon(
                             imageVector = Icons.Filled.Menu,
                             contentDescription = null
@@ -100,7 +100,8 @@ fun healthArticleScreen(
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
-    }
+    }*/
+
 }
 
 
