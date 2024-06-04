@@ -1,5 +1,9 @@
 package com.example.finalyearproject.ui.navigation
 
+import DoctorScreen
+import LabTestScreen
+import MedicineScreen
+import OrderDetailScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -38,6 +42,21 @@ fun navGraph(
 
         composable(route = "HealthArticle") {
             healthArticleScreen(navController = navController, viewModel = userAccountViewModel)
+        }
+
+        composable(route = "Medicine") {
+            MedicineScreen(navController = navController, viewModel = userAccountViewModel)
+        }
+
+        composable(route = "LabTest") {
+            LabTestScreen(navController = navController, viewModel = userAccountViewModel)
+        }
+
+        composable(route = "Doctor") {
+            DoctorScreen(navController = navController, viewModel = userAccountViewModel)
+        }
+        composable(route = "OrderDetails") {
+            OrderDetailScreen(navController = navController, viewModel = userAccountViewModel)
         }
     }
 }

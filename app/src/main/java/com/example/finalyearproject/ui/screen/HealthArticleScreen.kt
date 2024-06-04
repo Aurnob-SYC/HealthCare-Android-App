@@ -1,9 +1,16 @@
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
@@ -20,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +44,105 @@ import com.example.finalyearproject.ui.theme.FinalYearProjectTheme
 import kotlinx.coroutines.flow.Flow
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.window.Dialog
+import com.example.finalyearproject.R
+
+@Composable
+fun healthArticleScreen(
+    navController: NavController,
+    viewModel: UserAccountViewModel,
+    modifier: Modifier = Modifier
+) {
+    val imageUrls = listOf(
+        R.drawable.healtharticles1,
+        R.drawable.healtharticles2,
+        R.drawable.healtharticles3
+    )
+
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        items(imageUrls) { imageUrl ->
+            var showDialog by remember { mutableStateOf(false) }
+
+            Image(
+                painter = painterResource(id = imageUrl),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Max) // Ensure the height is intrinsic to maintain the aspect ratio.
+                    .clip(RoundedCornerShape(8.dp))
+                    .border(2.dp, Color.Gray, RoundedCornerShape(8.dp))
+                    .padding(vertical = 8.dp)
+                    .clickable { showDialog = true }
+            )
+
+            if (showDialog) {
+                Dialog(onDismissRequest = { showDialog = false }) {
+                    ZoomableImage(
+                        imageUrl = imageUrl,
+                        onDismiss = { showDialog = false }
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ZoomableImage(
+    imageUrl: Int,
+    onDismiss: () -> Unit
+) {
+    var scale by remember { mutableStateOf(1f) }
+    var offsetX by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableStateOf(0f) }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black)
+            .pointerInput(Unit) {
+                detectTransformGestures { _, pan, zoom, _ ->
+                    scale *= zoom
+                    offsetX += pan.x
+                    offsetY += pan.y
+                }
+            }
+            .clickable { onDismiss() }
+    ) {
+        Image(
+            painter = painterResource(id = imageUrl),
+            contentDescription = null,
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .graphicsLayer(
+                    scaleX = maxOf(1f, minOf(3f, scale)),
+                    scaleY = maxOf(1f, minOf(3f, scale)),
+                    translationX = offsetX,
+                    translationY = offsetY
+                )
+                .fillMaxSize()
+        )
+    }
+}
+
+/*@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun healthArticleScreen(
     navController: NavController,
@@ -44,65 +150,35 @@ fun healthArticleScreen(
     modifier: Modifier = Modifier
 
     ) {
-    /*val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
-    val healthArticles by viewModel.healthArticlesList.collectAsState()
-    val healthArticlesArray = healthArticles.toTypedArray()
-    Scaffold(
-        modifier = Modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection)
-            .fillMaxSize(),
 
-        topBar = {
-            CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
-                title = {
-                    Text(
-                        "Health Articles",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        viewModel.updateCurrentUser(null)
-                        navController.navigate("Home")
-                    }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = null
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { *//* do something *//* }) {
-                        Icon(
-                            imageVector = Icons.Filled.Menu,
-                            contentDescription = null
-                        )
-                    }
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
+    val imageUrls = listOf(
+        R.drawable.healtharticles1,
+        R.drawable.healtharticles2,
+        R.drawable.healtharticles3
+
+    )
+
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .padding(it)
-                .fillMaxSize()
-        ) {
-            viewModel.getHealthArticles()
-            healthArticlesArray.forEach { article ->
-                // Display each HealthArticle in a Text composable
-                Text(text = article.name)
-                Spacer(modifier = Modifier.height(8.dp))
-            }
+        items(imageUrls) { imageUrl ->
+            Image(
+                painter = painterResource(id = imageUrl),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Max) // Ensure the height is intrinsic to maintain the aspect ratio.
+                    .clip(RoundedCornerShape(8.dp))
+                    .border(2.dp, Color.Gray, RoundedCornerShape(8.dp))
+                    .padding(vertical = 8.dp)
+            )
         }
-    }*/
+    }
 
-}
+}*/
+
 
 
 
@@ -149,3 +225,4 @@ class MockUserAccountDao : UserAccountDao {
 
 }
 */
+

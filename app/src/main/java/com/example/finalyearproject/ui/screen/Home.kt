@@ -115,7 +115,9 @@ fun homeScreen(
                         .padding(10.dp)
                 ) {
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            navController.navigate("LabTest")
+                        },
                         modifier = Modifier.fillMaxSize()
                     ) {
                         Column(
@@ -141,7 +143,9 @@ fun homeScreen(
                         .padding(10.dp)
                 ) {
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            navController.navigate("Medicine")
+                        },
                         modifier = Modifier.fillMaxSize()
                     ) {
                         Column(
@@ -174,7 +178,9 @@ fun homeScreen(
                         .padding(10.dp)
                 ) {
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            navController.navigate("Doctor")
+                        },
                         modifier = Modifier.fillMaxSize()
                     ) {
                         Column(
@@ -234,7 +240,9 @@ fun homeScreen(
                         .padding(10.dp)
                 ) {
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            navController.navigate("OrderDetails")
+                        },
                         modifier = Modifier.fillMaxSize()
                     ) {
                         Column(
