@@ -15,9 +15,15 @@ class AppointmentListTypeConverter {
     @TypeConverter
     fun toAppointmentList(data: String): List<Pair<String, Date>> {
         val pairs = data.split(";")
-        return pairs.map {
-            val pairValues = it.split(":")
-            pairValues[0] to dateFormat.parse(pairValues[1])!!
+        return pairs.mapNotNull { pairString ->
+            val pairValues = pairString.split(":")
+            if (pairValues.size == 2) {
+                pairValues[0] to dateFormat.parse(pairValues[1])
+            } else {
+                // Handle invalid data format
+                null
+            }
         }
     }
+
 }

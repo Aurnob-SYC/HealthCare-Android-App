@@ -40,9 +40,14 @@ fun MedicineScreen(
                 MedicineItem(
                     medicine = medicine,
                     onAddToCart = { selectedMedicine ->
-                        coroutineScope.launch {
-                            cart.add(selectedMedicine)
-                        }
+
+                            viewModel.addMedicineToOrder(
+                                email = viewModel.currentUser.value ?: "",
+                                medicineName = selectedMedicine.name,
+                                quantity = 1 // Assuming adding one quantity at a time
+                            )
+
+
                     }
                 )
             }

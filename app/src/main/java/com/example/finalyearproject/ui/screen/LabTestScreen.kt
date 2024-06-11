@@ -44,6 +44,7 @@ fun LabTestScreen(
                     onAddToCart = { selectedLabTest ->
                         coroutineScope.launch {
                             cart.add(selectedLabTest)
+                            viewModel.addLabTestToOrder(email = viewModel.currentUser.value ?: "", selectedLabTest.name, selectedLabTest.price)
                         }
                     }
                 )
@@ -63,4 +64,3 @@ fun LabTestItem(labTest: LabTest, onAddToCart: (LabTest) -> Unit) {
         Text(text = "Price: $${labTest.price}", style = MaterialTheme.typography.bodyLarge)
     }
 }
-

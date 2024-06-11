@@ -3,12 +3,14 @@ package com.example.finalyearproject.ui.navigation
 import DoctorScreen
 import LabTestScreen
 import MedicineScreen
-import OrderDetailScreen
+
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.finalyearproject.ui.screen.OrderDetailsScreen
 import com.example.finalyearproject.ui.screen.viewModel.UserAccountViewModel
 import com.example.finalyearproject.ui.screen.homeScreen
 import com.example.finalyearproject.ui.screen.logInScreen
@@ -56,7 +58,7 @@ fun navGraph(
             DoctorScreen(navController = navController, viewModel = userAccountViewModel)
         }
         composable(route = "OrderDetails") {
-            OrderDetailScreen(navController = navController, viewModel = userAccountViewModel)
+            OrderDetailsScreen(navController = navController, viewModel = userAccountViewModel)
         }
     }
 }

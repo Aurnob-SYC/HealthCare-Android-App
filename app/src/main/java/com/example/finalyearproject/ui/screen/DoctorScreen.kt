@@ -56,6 +56,7 @@ fun DoctorScreen(
                     onAddToCart = { selectedDoctor, selectedAppointment ->
                         coroutineScope.launch {
                             cart.add(Pair(selectedDoctor, selectedAppointment))
+                            viewModel.addDoctorAppointmentToOrder(email = viewModel.currentUser.value ?: "", selectedDoctor.name, selectedAppointment.date ?: Date())
                         }
                     }
                 )
@@ -125,4 +126,3 @@ fun AppointmentItem(
         }
     }
 }
-

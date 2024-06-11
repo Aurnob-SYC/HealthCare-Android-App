@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.finalyearproject.data.entity.HealthArticles
+import com.example.finalyearproject.data.entity.OrderDetails
 import com.example.finalyearproject.data.entity.UserAccount
 import kotlinx.coroutines.flow.Flow
 
@@ -35,5 +36,11 @@ interface UserAccountDao {
     fun insertAllHealthArticles(healthArticles: List<HealthArticles>)
 
     //
+    // Order Details
+    @Query("SELECT * FROM OrderDetails WHERE email = :email")
+    fun getOrderDetailsByEmail(email: String): Flow<OrderDetails?>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertOrderDetails(orderDetails: OrderDetails)
 
 }

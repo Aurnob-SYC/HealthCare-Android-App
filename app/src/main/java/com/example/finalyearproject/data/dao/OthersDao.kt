@@ -24,14 +24,7 @@ interface OthersDao {
 
     @Delete
     fun deleteLabTest(labTest: LabTest)
-    /*fun getAllLabTests(): List<LabTest>
-    abstract fun updateLabTest(labTest: LabTest)
-    fun getAllMedicines(): List<Medicine>
-    abstract fun updateMedicine(medicine: Medicine)
-    abstract fun getAllHealthArticles(): List<HealthArticles>
-    abstract fun insertHealthArticle(healthArticle: HealthArticles)
-    abstract fun updateHealthArticle(healthArticle: HealthArticles)
-    abstract fun deleteHealthArticle(healthArticle: HealthArticles)*/
+
 
 }
 

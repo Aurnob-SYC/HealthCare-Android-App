@@ -35,15 +35,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     )
-    private val viewModelOthers by viewModels<OthersViewModel>(
-        factoryProducer = {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return OthersViewModel(db.othersDao) as T
-                }
-            }
-        }
-    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
